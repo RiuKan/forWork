@@ -171,7 +171,20 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 web_localURL = pre_url
                 webbrowser.register("wb", None,webbrowser.BackgroundBrowser(pre_url))
 
+# TODO 매번 새롭게 불러오는 것 보단, 이미 불러온 자료는 임시로 변수 저장해놓는게 좋지 않을까? 다만, 실시간으로 새로뜨는 공시가 나올 수 있어서 더 생각,
+# TODO 다시 봐도 쉽게 파악할 수 있도록, 기능 기록을 습관화 하자.
+# TODO 읽음 처리 방법 생각. (체크박스 파일 저장 csv로)
+# TODO 두개 버전으로 커스톰 가능하도록,
+# TODO 창크기 유연하게 바뀌도록
+# TODO 달력에 표시, 해당 달꺼만
+# TODO 오늘 공시가 올라온 사이트는 버튼 색 표시
+# TODO 로딩에 필요한 것들 분산하기 (속도 분산)
+# TODO 파일을 다운로드 받아 바로 열 수 있도록, 파일 선택 가능하도록
+# TODO 링크와 내용 분리(팝업으로 내용(표 나타내는법 알아내야함) 보여주고, 링크는 버튼으로 놔두기)
 
+# TODO 기억할 것은 최소한 바로가기 해놓은 것 보다 편리해야하고, 뇌의 처리과정을 단축시켜줘야한다.
+# TODO 오늘 공시가 올라온 사이트가 뭘까 -> 다 켜는것이 아닌, 버튼의 색깔로 한번에 구분
+# TODO 사이트를 다 켜고도, 날짜를 구분해 확인해야하는 번거로움, 해당 날짜만 뽑아서 보여주기.
             roots.destroy()
 
     def sym_button_clicked(self):
@@ -302,7 +315,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                         self.gridLayout.addWidget(cell, x, y)
                         # TODO 굳이 라벨 만들때 하이퍼링크 길게, 레퍼런스 해서 넣을 필요 없긴 함. 그냥 아무거나해줘서 하이퍼만 걸면 됨.
                     elif y == 3:
-
+                        # TODO 따로 다운받아지게 하는 것
 
                         button = MakingButton("문서")
 
