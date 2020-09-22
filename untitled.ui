@@ -27,16 +27,6 @@
      <property name="spacing">
       <number>2</number>
      </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>심평원</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0">
        <property name="bottomMargin">
@@ -70,6 +60,16 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>심평원</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -112,13 +112,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>200</y>
       <width>41</width>
       <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>목록</string>
+     <string>심평</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -199,69 +199,56 @@
      <string>보건복지부 예고</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="button_sym_list">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>10</y>
-      <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="button_bog_list">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>10</y>
-      <width>81</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="button_hyeop_list">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>10</y>
-      <width>71</width>
-      <height>21</height>
+      <x>10</x>
+      <y>320</y>
+      <width>41</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>보협</string>
     </property>
    </widget>
    <widget class="QPushButton" name="button_tong_list">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>10</y>
-      <width>131</width>
-      <height>21</height>
+      <x>10</x>
+      <y>380</y>
+      <width>41</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>보통</string>
     </property>
    </widget>
    <widget class="QPushButton" name="button_ye_list">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>10</y>
-      <width>121</width>
-      <height>21</height>
+      <x>10</x>
+      <y>430</y>
+      <width>41</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>보예</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_bog_list">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>41</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>보건</string>
     </property>
    </widget>
   </widget>
@@ -280,6 +267,7 @@
     </property>
     <addaction name="separator"/>
     <addaction name="action_2"/>
+    <addaction name="action"/>
     <addaction name="separator"/>
     <addaction name="action_8"/>
     <addaction name="action_4"/>
@@ -317,6 +305,11 @@
   <action name="action_9">
    <property name="text">
     <string>커스토마이징</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>시작 프로그램 등록</string>
    </property>
   </action>
  </widget>

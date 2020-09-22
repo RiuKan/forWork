@@ -9,7 +9,9 @@ import os
 from requests import get, post
 
 from bs4 import BeautifulSoup
-from time import strftime, localtime, time
+# from time import strftime, localtime, time
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
         #날짜 비교 elif 넣기
@@ -19,10 +21,6 @@ class MakingLabel(QLabel):
 
     def __init__(self,text):
         super(MakingLabel, self).__init__(text)
-        self.setText(text)
-class MakingButton(QPushButton):
-    def __init__(self,text):
-        super(MakingButton, self).__init__(text)
         self.setText(text)
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -37,10 +35,6 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setSpacing(2)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.label = QLabel(self.gridLayoutWidget)
-        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-        self.label.setObjectName("label")
-        self.gridLayout_3.addWidget(self.label, 0, 0, 1, 1)
         self.gridLayout = QGridLayout()
         self.gridLayout.setContentsMargins(-1, -1, -1, 0)
         self.gridLayout.setHorizontalSpacing(2)
@@ -60,6 +54,10 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_5, 0, 2, 1, 1)
         self.gridLayout.setColumnStretch(0, 1)
         self.gridLayout_3.addLayout(self.gridLayout, 0, 1, 1, 1)
+        self.label = QLabel(self.gridLayoutWidget)
+        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.label.setObjectName("label")
+        self.gridLayout_3.addWidget(self.label, 0, 0, 1, 1)
         self.dateEdit = QDateEdit(self.centralwidget)
         self.dateEdit.setGeometry(QRect(120, 30, 171, 51))
         self.dateEdit.setAlignment(Qt.AlignCenter)
@@ -71,7 +69,7 @@ class Ui_MainWindow(object):
         self.pushButton_today.setGeometry(QRect(50, 50, 61, 31))
         self.pushButton_today.setObjectName("pushButton_today")
         self.pushButton_sym = QPushButton(self.centralwidget)
-        self.pushButton_sym.setGeometry(QRect(10, 110, 41, 51))
+        self.pushButton_sym.setGeometry(QRect(10, 200, 41, 51))
         self.pushButton_sym.setObjectName("pushButton_sym")
         self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QRect(880, 30, 151, 28))
@@ -91,26 +89,18 @@ class Ui_MainWindow(object):
         self.button_ye = QPushButton(self.centralwidget)
         self.button_ye.setGeometry(QRect(730, 40, 121, 41))
         self.button_ye.setObjectName("button_ye")
-        self.button_sym_list = QPushButton(self.centralwidget)
-        self.button_sym_list.setGeometry(QRect(310, 10, 71, 21))
-        self.button_sym_list.setText("")
-        self.button_sym_list.setObjectName("button_sym_list")
-        self.button_bog_list = QPushButton(self.centralwidget)
-        self.button_bog_list.setGeometry(QRect(400, 10, 81, 21))
-        self.button_bog_list.setText("")
-        self.button_bog_list.setObjectName("button_bog_list")
         self.button_hyeop_list = QPushButton(self.centralwidget)
-        self.button_hyeop_list.setGeometry(QRect(500, 10, 71, 21))
-        self.button_hyeop_list.setText("")
+        self.button_hyeop_list.setGeometry(QRect(10, 320, 41, 51))
         self.button_hyeop_list.setObjectName("button_hyeop_list")
         self.button_tong_list = QPushButton(self.centralwidget)
-        self.button_tong_list.setGeometry(QRect(590, 10, 131, 21))
-        self.button_tong_list.setText("")
+        self.button_tong_list.setGeometry(QRect(10, 380, 41, 41))
         self.button_tong_list.setObjectName("button_tong_list")
         self.button_ye_list = QPushButton(self.centralwidget)
-        self.button_ye_list.setGeometry(QRect(730, 10, 121, 21))
-        self.button_ye_list.setText("")
+        self.button_ye_list.setGeometry(QRect(10, 430, 41, 51))
         self.button_ye_list.setObjectName("button_ye_list")
+        self.button_bog_list = QPushButton(self.centralwidget)
+        self.button_bog_list.setGeometry(QRect(10, 260, 41, 51))
+        self.button_bog_list.setObjectName("button_bog_list")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setGeometry(QRect(0, 0, 1141, 26))
@@ -133,8 +123,11 @@ class Ui_MainWindow(object):
         self.action_8.setObjectName("action_8")
         self.action_9 = QAction(MainWindow)
         self.action_9.setObjectName("action_9")
+        self.action = QAction(MainWindow)
+        self.action.setObjectName("action")
         self.menu_2.addSeparator()
         self.menu_2.addAction(self.action_2)
+        self.menu_2.addAction(self.action)
         self.menu_2.addSeparator()
         self.menu_2.addAction(self.action_8)
         self.menu_2.addAction(self.action_4)
@@ -150,13 +143,17 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "심평원"))
         self.pushButton_today.setText(_translate("MainWindow", "오늘"))
-        self.pushButton_sym.setText(_translate("MainWindow", "목록"))
+        self.pushButton_sym.setText(_translate("MainWindow", "심평"))
         self.pushButton.setText(_translate("MainWindow", "브라우저 파일 지정"))
         self.select_sym.setText(_translate("MainWindow", "심평원"))
         self.select_bog.setText(_translate("MainWindow", "보건복지부"))
         self.select_hyeop.setText(_translate("MainWindow", "보건협회"))
         self.button_tong.setText(_translate("MainWindow", "보건의료통합자원"))
         self.button_ye.setText(_translate("MainWindow", "보건복지부 예고"))
+        self.button_hyeop_list.setText(_translate("MainWindow", "보협"))
+        self.button_tong_list.setText(_translate("MainWindow", "보통"))
+        self.button_ye_list.setText(_translate("MainWindow", "보예"))
+        self.button_bog_list.setText(_translate("MainWindow", "보건"))
         self.menu_2.setTitle(_translate("MainWindow", "설정"))
         self.action_2.setText(_translate("MainWindow", "브라우저 파일 지정"))
         self.action_4.setText(_translate("MainWindow", "버그 리포트"))
@@ -164,30 +161,57 @@ class Ui_MainWindow(object):
         self.action_6.setText(_translate("MainWindow", "버전 확인"))
         self.action_8.setText(_translate("MainWindow", "버전 확인"))
         self.action_9.setText(_translate("MainWindow", "커스토마이징"))
+        self.action.setText(_translate("MainWindow", "시작 프로그램 등록"))
 
 class MyWindow(QMainWindow, Ui_MainWindow):
-
+    global saved_months
+    saved_months = []
     def __init__(self):
         super().__init__()
         self.setUI()
-        # self.getList(strftime('%Y-%m-%d', localtime(time())))
+        # 시간
+        global today
+        global today_str
+        today = datetime.now()
+        today_str = today.strftime('%Y-%m-%d')
+        # today last page 정보
+        global last_page
+        last_page = 1
+
+
+        # 각각 현재 페이지 상태 변수로 담기 (딕셔너리로 key:페이지, data:해당월)
+        # 처음 시작하면, 한달 긁어오는 것. (last page 정보 넣기, 그 이후 찾도록 하기)
+        if today.day >= 15:
+            loop_all(today.month)
+            saved_months.append(today.month)
+        else:
+            one_month_ago = today - relativedelta(month=1)
+            loop_all(today.month)
+            loop_all((today - one_month_ago.month)
+            saved_months.append(today.month, one_month_ago.month)
+
+        # self.getList(today_str)
         self.dateEdit.setDate(QDate.currentDate())
         self.pushButton_today.clicked.connect(lambda: self.today_button_clicked())
         self.pushButton_sym.clicked.connect(lambda : self.sym_button_clicked())
         # self.pushButton_bog.clicked.connect(lambda : self.bog_button_clicked())
         # self.pushButton_web.clicked.connect(lambda: self.web_button_clicked())
         global web_localURL
-        web_localURL = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
+        web_localURL = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
         webbrowser.register("wb", None,webbrowser.BackgroundBrowser(web_localURL))
-
-
-
-
-
-
-
         # for 이중 loop로 리스트 안의 리스트 뽑아서 공간에 넣기 (마지막은 버튼)
         self.dateEdit.dateChanged.connect(lambda: self.getList(self.dateEdit.date().toString("yyyy-MM-dd")))
+
+    def loop_all(self.mon):
+        loop_sym
+        loop_bog
+        loop_hyeop
+        loop_tong
+        loop_ye
+        # 리스폰스 받아온다. 날짜 리스트 뽑는다.
+        # if 마지막 날짜가 해당 월이면, 페이지 긁어서 저장 후, 다음페이지 긁어 온다
+        # else 마지막 날짜가 해당 월이 아니면, 그 페이지에서 해당 월 초 이상의 글을 찾고 긁어온다.
+
     def today_button_clicked(self):
         self.dateEdit.setDate(QDate.currentDate())
     def bog_button_clicked(self):
@@ -233,7 +257,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 # TODO 커스토마이징 기능 도입(위치나 크기, 글자크기 등을 수정하는 ui 보여주기)
 # TODO HTML 파일 입력시 원하는 부위 주소 찾아주는 기능(타부서 변경 가능하도록)
 # TODO 업데이트 구현 (google app engine 이용)
-            roots.destroy()
+# TODO 파일 없을때 표시 안하기,혹은 비활성화(뭔가 표시는 해야함)
+# TODO 시작프로그램 등록
+# TODO 기능 투표기능
+# TODO 타 기관으로 교체되는 것이 아니라 추가 삭제형식으로 한다면?
+# TODO 사용 로그 주기적 전송
+# TODO refresh 버튼을 만들지, 아니면 다시 누르도록 할지
+# TODO 팝업이용 전날 못보고 지나친 고시 시스템 팝업 혹은 프로그램에 표시
+# TODO 다운과 링크 누를 시,
+# TODO 램을 차지하냐 CPU를 매번 쓰냐 선택은, 램을 차지 하는 것으로 일단. (한달치 저장하냐, 그때그때불러서쓰냐)
+        roots.destroy()
 
     def sym_button_clicked(self):
 
@@ -484,6 +517,18 @@ class MyWindow(QMainWindow, Ui_MainWindow):
     #
     #                     button.clicked.connect(lambda:self.buttonClicked("bog"))
     #                     self.gridLayout_2.addWidget(button,x,y)
+
+    def make_response(self,institute ,date):
+            # 한달씩 찾아오는데, 검색안했던 월만 찾아옴, 거의 안 쓰일듯.(last_page기반)
+            date_time = datetime.strptime(date,"%Y-%m-%d")
+
+            if  date_time.month not in saved_months:
+                loop_all(date_time.month)
+                saved_months.append(date_time.month)
+            else:
+                pass
+
+
     def setUI(self):
         self.setupUi(self)
 
